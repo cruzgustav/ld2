@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria Elieth | Consultoria de Fragrâncias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Identidade Visual */
+            --color-primary: #263b2f; /* Verde Botânico Escuro */
+            --color-accent: #cfa86e;  /* Dourado Fosco */
+            --color-bg: #fdfcfb;      /* Branco Papel */
+            --color-text: #333333;    /* Cinza Escuro */
+            --color-cta: #e05d45;     /* Cor de destaque para compra */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f5f5f5;
+            color: var(--color-text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .magazine-page {
+            width: 100%;
+            max-width: 600px;
+            background: var(--color-bg);
+            min-height: 100vh;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 601px) {
+            .magazine-page {
+                min-height: 90vh;
+                margin: 20px;
+                border: 1px solid #e0e0e0;
+            }
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-primary);
+            line-height: 1.2;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+        
+        .logo-img {
+            max-width: 220px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* --- BARRA DE PROGRESSO --- */
+        .progress-container {
+            width: 100%;
+            height: 2px;
+            background: #eee;
+            margin-bottom: 30px;
+            display: none;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--color-primary);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* --- BOTÕES GERAIS --- */
+        .btn-editorial {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+            padding: 16px 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        .btn-editorial:hover {
+            background-color: #f4f4f4;
+        }
+
+        /* --- BOTÃO DE COMPRA (DESTAQUE) --- */
+        .btn-shop-now {
+            background-color: var(--color-primary);
+            color: #fff;
+            padding: 18px 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 25px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(38, 59, 47, 0.2);
+        }
+
+        .btn-shop-now:hover {
+            background-color: #1a2920;
+            transform: translateY(-2px);
+        }
+
+        /* --- INTRO --- */
+        #intro-section {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+        .intro-lead {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 20px 0 40px;
+            font-style: italic;
+        }
+
+        /* --- QUIZ --- */
+        #quiz-section {
+            display: none;
+            flex: 1;
+        }
+
+        .question-number {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .question-text {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .option-card:hover {
+            border-color: var(--color-accent);
+            background-color: #fafafa;
+        }
+
+        /* --- RESULTADO --- */
+        #result-section {
+            display: none;
+            text-align: center;
+        }
+
+        .result-label {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* ATUALIZAÇÃO: MAIN PRODUCT AGORA É RELATIVO PARA POSICIONAR OS ÍCONES */
+        .main-product {
+            border: 1px solid var(--color-accent);
+            padding: 30px 20px;
+            margin-bottom: 40px;
+            background: #fff;
+            position: relative; /* Importante para os ícones */
+        }
+
+        /* --- NOVA ÁREA: ÍCONES SOCIAIS FLUTUANTES --- */
+        .social-floating-container {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .social-icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+
+        .social-icon-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--color-accent); /* Dourado */
+            transition: fill 0.3s;
+        }
+
+        .social-icon-btn:hover {
+            background-color: var(--color-primary); /* Verde */
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .social-icon-btn:hover svg {
+            fill: #fff; /* Ícone branco no hover */
+        }
+
+        /* Tooltip simples */
+        .social-icon-btn[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 4px 8px;
+            font-size: 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        /* --- FIM DA NOVA ÁREA --- */
+
+        .product-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+            background: #fff;
+            object-fit: contain;
+        }
+
+        .product-name {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        .product-desc {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .recommendations {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .rec-item {
+            width: 48%;
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .rec-name {
+            font-weight: bold;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .rec-brand {
+            font-size: 0.75rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="magazine-page">
+        
+        <header id="app-header">
+            <img src="logo.png" alt="Maria Elieth Cosméticos" class="logo-img" onerror="this.style.display='none'; document.getElementById('header-text').style.display='block'">
+            <h2 id="header-text" style="display:none; color: var(--color-primary);">Maria Elieth</h2>
+        </header>
+
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div id="intro-section">
+            <h1>Descubra sua fragrância ideal.</h1>
+            <p class="intro-lead">Uma curadoria digital para encontrar o perfume Natura ou Avon que combina com sua personalidade e momento atual.</p>
+            <button class="btn-editorial" style="background-color: var(--color-primary); color: #fff;" onclick="quiz.start()">Iniciar Consultoria</button>
+        </div>
+
+        <div id="quiz-section">
+            <span class="question-number" id="q-number">Questão 01</span>
+            <h2 class="question-text" id="q-text">Texto da Pergunta</h2>
+            <div class="options-grid" id="q-options">
+                </div>
+        </div>
+
+        <div id="result-section">
+            <span class="result-label">Sua Assinatura Olfativa</span>
+            
+            <div class="main-product">
+                <div class="social-floating-container">
+                    
+                    <a href="#" class="social-icon-btn" id="share-wa" title="Compartilhar no WhatsApp" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </a>
+
+                    <a href="javascript:void(0)" class="social-icon-btn" onclick="quiz.shareInsta()" title="Postar no Instagram (Copiar Legenda)">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+
+                    <a href="#" class="social-icon-btn" id="share-x" title="Postar no X" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+
+                    <a href="#" class="social-icon-btn" id="share-fb" title="Compartilhar no Facebook" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                    </a>
+
+                </div>
+                <p style="font-size: 0.8rem; text-transform: uppercase; color: #888; margin-bottom: 5px;" id="res-brand">Marca</p>
+                <img src="" alt="Perfume" class="product-image" id="res-img" onerror="this.src='https://placehold.co/200x250/f5f5f5/888?text=Foto+Indisponível'">
+                <h2 class="product-name" id="res-name">Nome do Perfume</h2>
+                <p class="product-desc" id="res-desc">Descrição sensorial...</p>
+                
+                <a href="#" target="_blank" id="btn-buy-online" class="btn-shop-now">
+                    Comprar Online Agora
+                </a>
+                <p style="font-size: 0.7rem; color: #999; margin-top: 10px;">Você será redirecionada para minha Loja Natura</p>
+            </div>
+
+            <span class="result-label" style="color: #999; margin-bottom: 20px;">Outras sugestões para você</span>
+            
+            <div class="recommendations">
+                <div class="rec-item">
+                    <img src="" class="product-image" style="max-width:100px; margin-bottom:10px;" id="alt1-img" onerror="this.src='https://placehold.co/100x100/f5f5f5/888?text=Opção+1'">
+                    <span class="rec-name" id="alt1-name">Opção 1</span>
+                    <span class="rec-brand" id="alt1-brand">Marca</span>
+                </div>
+                <div class="rec-item">
+                    <img src="" class="product-image" style="max-width:100px; margin-bottom:10px;" id="alt2-img" onerror="this.src='https://placehold.co/100x100/f5f5f5/888?text=Opção+2'">
+                    <span class="rec-name" id="alt2-name">Opção 2</span>
+                    <span class="rec-brand" id="alt2-brand">Marca</span>
+                </div>
+            </div>
+
+            <a href="#" target="_blank" id="whatsapp-btn" class="btn-editorial">
+                Prefiro falar no WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+    <script>
+        // --- BANCO DE DADOS ATUALIZADO ---
+        const database = {
+            female: {
+                fresh: {
+                    main: { 
+                        name: "Kaiak Aventura Feminino", 
+                        brand: "Natura", 
+                        desc: "Floral aquoso, vibrante e cheio de energia para o dia a dia.", 
+                        img: "https://tse1.mm.bing.net/th/id/OIP.uwv_uCqD2eWiJ0z25wyHewHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Pur Blanca", 
+                        brand: "Avon", 
+                img:"https://imagens.ne10.uol.com.br/veiculos/_midias/webp/2024/06/17/divulgacao__avon___pur_blanca-27301733.webp" 
+                    },
+                    alt2: { 
+                        name: "Ekos Maracujá", 
+                        brand: "Natura", 
+                        img: "https://http2.mlstatic.com/D_NQ_NP_670888-MLA46897357538_072021-F.jpg" 
+                    }
+                },
+                sweet: {
+                    main: { 
+                        name: "Kriska Drama", 
+                        brand: "Natura", 
+                        desc: "Adocicado intenso, com nozes carameladas e baunilha.", 
+                        img: "https://tse1.explicit.bing.net/th/id/OIP._-b0VxL8TsmacrYPWhWkqwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Far Away", 
+                        brand: "Avon", 
+                        img: "https://tse3.mm.bing.net/th/id/OIP.fpCRwNYbXP583JPryVpUDwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt2: { 
+                        name: "Humor Próprio", 
+                        brand: "Natura", 
+                        img: "https://tse4.mm.bing.net/th/id/OIP.FbNaYMFubYDAGtc5iL0cWgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
+                },
+                floral: {
+                    main: { 
+                        name: "Ilía Clássico", 
+                        brand: "Natura", 
+                        desc: "Elegância pura. Um floral branco sofisticado e moderno.", 
+                        img: "https://tse2.mm.bing.net/th/id/OIP.4kfc4zHc3W8SuKY_5IgaHAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Luna", 
+                        brand: "Natura", 
+                        img: "https://fimgs.net/mdimg/perfume/375x500.31811.jpg" 
+                    },
+                    alt2: { 
+                        name: "Attraction", 
+                        brand: "Avon", 
+                        img: "https://images-na.ssl-images-amazon.com/images/I/711eKKqiwkL._SL1500_.jpg" 
+                    }
+                },
+                intense: {
+                    main: { 
+                        name: "Essencial Oud Feminino", 
+                        brand: "Natura", 
+                        desc: "Madeira Oud com flores. Poderoso, marcante e luxuoso.", 
+                        img: "https://fraguru.com/mdimg/perfume/375x500.52564.jpg" 
+                    },
+                    alt1: { 
+                        name: "Imari Rouge", 
+                        brand: "Avon", 
+                        img: "https://http2.mlstatic.com/D_NQ_NP_759159-MLM48154438171_112021-O.webp" 
+                    },
+                    alt2: { 
+                        name: "Ilía Secreto", 
+                        brand: "Natura", 
+                        img: "https://tse1.mm.bing.net/th/id/OIP.Mhnb-W-hwL7Xl7VQNJBv3AHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
+                }
+            },
+            male: {
+                fresh: {
+                    main: { 
+                        name: "Kaiak Urbe", 
+                        brand: "Natura", 
+                        desc: "Frescor das notas herbais com a modernidade das madeiras.", 
+                        img: "https://cf.shopee.com.br/file/c2f72d5c82beb828649cabecd3e22be9" 
+                    },
+                    alt1: { 
+                        name: "300km/h", 
+                        brand: "Avon", 
+                        img: "https://th.bing.com/th/id/R.e1d96ccd10a9d85f5bd17fb9fad836ca?rik=wmoqRjC2xgdPrA&pid=ImgRaw&r=0" 
+                    },
+                    alt2: { 
+                        name: "Natura Homem", 
+                        brand: "Natura", 
+                        img: "https://tse1.mm.bing.net/th/id/OIP.PhzrWsmBjueyIVaKKCYB5wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
+                },
+                wood: {
+                    main: { 
+                        name: "Essencial Exclusivo", 
+                        brand: "Natura", 
+                        desc: "Madeira nobre e especiarias frias. Sofisticação masculina.", 
+                        img: "https://th.bing.com/th/id/R.f534280a96cb75ca0b3e582063bf29e6?rik=vU%2bMHxxd30CcVw&pid=ImgRaw&r=0" 
+                    },
+                    alt1: { 
+                        name: "Segno", 
+                        brand: "Avon", 
+                        img: "https://pimages.parfumo.de/720/113135_img-4765-avon-segno_720.jpg" 
+                    },
+                    alt2: { 
+                        name: "Homem Sagaz", 
+                        brand: "Natura", 
+                        img: "https://images-americanas.b2w.io/produtos/2419122091/imagens/perfume-homem-sagaz-deo-parfum-100ml-natura/2419122103_1_xlarge.jpg" 
+                    }
+                },
+                intense: {
+                    main: { 
+                        name: "Essencial Oud Masculino", 
+                        brand: "Natura", 
+                        desc: "A madeira mais nobre do mundo. Para homens que deixam marca.", 
+                        img: "https://m.media-amazon.com/images/I/51+V6pgWCNL.jpg" 
+                    },
+                    alt1: { 
+                        name: "Black Essential", 
+                        brand: "Avon", 
+                        img: "https://product-data.raiadrogasil.io/images/5483852.webp" 
+                    },
+                    alt2: { 
+                        name: "K Max", 
+                        brand: "Natura", 
+                        img: "https://fraguru.com/mdimg/perfume/375x500.55558.jpg" 
+                    }
+                },
+                spiced: {
+                    main: { 
+                        name: "Humor a Dois", 
+                        brand: "Natura", 
+                        desc: "Irreverente, com pimenta preta e notas amadeiradas.", 
+                        img: "https://tse2.mm.bing.net/th/id/OIP.G2l7lSg9yWgvhbLzhdvFxgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt1: { 
+                        name: "Attraction Game", 
+                        brand: "Avon", 
+                        img: "https://tse3.mm.bing.net/th/id/OIP.TVE2xVsvx1VNME5bB6tjqQHaJU?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    },
+                    alt2: { 
+                        name: "Kaiak Aero", 
+                        brand: "Natura", 
+                        img: "https://tse3.mm.bing.net/th/id/OIP.zOCSd-PkAQt-kCFEVrxpRgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                    }
+                }
+            }
+        };
+
+        const questionsCommon = [
+            {
+                text: "Qual é o seu momento preferido?",
+                options: ["Manhãs frescas e ativas", "Tardes de sol", "Noites especiais", "Fins de semana relaxantes"]
+            },
+            {
+                text: "Qual intensidade você procura?",
+                options: ["Suave e discreto", "Marcante (presente)", "Intenso (deixa rastro)", "Explosivo (chama atenção)"]
+            },
+            {
+                text: "Onde você vai usar mais?",
+                options: ["Trabalho / Dia a dia", "Academia / Esportes", "Encontros / Jantares", "Festas / Baladas"]
+            },
+            {
+                text: "Como você se descreve hoje?",
+                options: ["Tranquilo(a) e Leve", "Sedutor(a) e Ousado(a)", "Elegante e Sério(a)", "Divertido(a) e Moderno(a)"]
+            },
+            // Pergunta Chave (Índice 4)
+            {
+                text: "Qual cheiro mais te agrada?",
+                options: ["Cítricos e Ervas (Frescor)", "Doces e Baunilha (Envolvente)", "Madeiras e Couro (Sofisticado)", "Especiarias e Pimenta (Quente)"]
+            }
+        ];
+
+        const quiz = {
+            whatsappPhone: "558198786412",
+            myStoreLink: "https://www.natura.com.br/consultoria/elieth",
+            consultoriaLink: "https://mariaelieth046.github.io/Consultoria/",
+            gender: null,
+            profile: null,
+            step: 0,
+            
+            elements: {
+                header: document.getElementById('app-header'),
+                intro: document.getElementById('intro-section'),
+                quizSection: document.getElementById('quiz-section'),
+                resultSection: document.getElementById('result-section'),
+                progressCont: document.getElementById('progress-container'),
+                progressBar: document.getElementById('progress-bar'),
+                qNumber: document.getElementById('q-number'),
+                qText: document.getElementById('q-text'),
+                qOptions: document.getElementById('q-options')
+            },
+
+            start: function() {
+                this.elements.header.style.display = 'none';
+                this.elements.intro.style.display = 'none';
+                this.elements.quizSection.style.display = 'block';
+                this.elements.progressCont.style.display = 'block';
+                this.askGender();
+            },
+
+            askGender: function() {
+                this.step = 0;
+                this.elements.progressBar.style.width = "10%";
+                this.elements.qNumber.innerText = "Questão 01";
+                this.elements.qText.innerText = "Para quem é o perfume?";
+                
+                this.elements.qOptions.innerHTML = `
+                    <div class="option-card" onclick="quiz.setGender('female')">
+                        <span>Feminino</span> <small style="color:#ccc">→</small>
+                    </div>
+                    <div class="option-card" onclick="quiz.setGender('male')">
+                        <span>Masculino</span> <small style="color:#ccc">→</small>
+                    </div>
+                `;
+            },
+
+            setGender: function(g) {
+                this.gender = g;
+                this.step = 1;
+                this.nextQuestion();
+            },
+
+            nextQuestion: function() {
+                let qIndex = this.step - 1; 
+
+                if (qIndex < questionsCommon.length) {
+                    let q = questionsCommon[qIndex];
+                    let pct = ((this.step) / (questionsCommon.length + 1)) * 100;
+                    this.elements.progressBar.style.width = pct + "%";
+                    this.elements.qNumber.innerText = `Questão 0${this.step + 1}`;
+                    this.elements.qText.innerText = q.text;
+
+                    this.elements.qOptions.innerHTML = '';
+                    q.options.forEach((opt, idx) => {
+                        let btn = document.createElement('div');
+                        btn.className = 'option-card';
+                        btn.innerHTML = `<span>${opt}</span> <small style="color:#ccc">→</small>`;
+                        btn.onclick = () => this.handleAnswer(qIndex, idx);
+                        this.elements.qOptions.appendChild(btn);
+                    });
+
+                } else {
+                    this.finish();
+                }
+            },
+
+            handleAnswer: function(qIndex, optIndex) {
+                if (qIndex === 4) {
+                    if (this.gender === 'female') {
+                        if (optIndex === 0) this.profile = 'fresh';
+                        if (optIndex === 1) this.profile = 'sweet';
+                        if (optIndex === 2) this.profile = 'floral'; 
+                        if (optIndex === 3) this.profile = 'intense';
+                    } else {
+                        if (optIndex === 0) this.profile = 'fresh';
+                        if (optIndex === 1) this.profile = 'spiced';
+                        if (optIndex === 2) this.profile = 'wood';
+                        if (optIndex === 3) this.profile = 'intense';
+                    }
+                } else {
+                    if (!this.profile) this.profile = this.gender === 'female' ? 'floral' : 'wood';
+                }
+
+                this.step++;
+                this.nextQuestion();
+            },
+
+            finish: function() {
+                this.elements.quizSection.style.display = 'none';
+                this.elements.progressCont.style.display = 'none';
+                this.elements.resultSection.style.display = 'block';
+
+                const data = database[this.gender][this.profile];
+
+                // Preencher Info Visual
+                document.getElementById('res-brand').innerText = data.main.brand;
+                document.getElementById('res-name').innerText = data.main.name;
+                document.getElementById('res-desc').innerText = data.main.desc;
+                document.getElementById('res-img').src = data.main.img;
+
+                document.getElementById('alt1-name').innerText = data.alt1.name;
+                document.getElementById('alt1-brand').innerText = data.alt1.brand;
+                document.getElementById('alt1-img').src = data.alt1.img;
+
+                document.getElementById('alt2-name').innerText = data.alt2.name;
+                document.getElementById('alt2-brand').innerText = data.alt2.brand;
+                document.getElementById('alt2-img').src = data.alt2.img;
+
+                // --- LÓGICA DO LINK DE COMPRA ---
+                const productName = encodeURIComponent(data.main.name).replace(/%20/g, '+');
+                const searchLink = `https://www.natura.com.br/s/produtos?busca=${productName}&consultoria=elieth`;
+                
+                document.getElementById('btn-buy-online').href = searchLink;
+
+                // --- LÓGICA WHATSAPP (VENDAS) ---
+                const msg = `Olá Maria Elieth!%0A%0A` +
+                            `O quiz indicou o perfume:%0A` +
+                            `*${data.main.name}* (${data.main.brand})%0A%0A` +
+                            `Outras opções que gostei:%0A` +
+                            `1. ${data.alt1.name}%0A` +
+                            `2. ${data.alt2.name}%0A%0A` +
+                            `Pode me ajudar com isso?`;
+
+                document.getElementById('whatsapp-btn').href = `https://wa.me/${this.whatsappPhone}?text=${msg}`;
+
+                // --- ATUALIZAR OS LINKS DE COMPARTILHAMENTO SOCIAL ---
+                this.updateSocialLinks(data.main.name, data.main.brand);
+            },
+
+            // --- NOVA FUNÇÃO ROBUSTA DE COMPARTILHAMENTO ---
+            updateSocialLinks: function(pName, pBrand) {
+                // Texto Persuasivo
+                const shareText = `Fiz o teste da consultora e descobri meu próximo perfume ideal, com apenas 10 perguntas! 😍\n\nMeu resultado: ${pName} (${pBrand}).\n\nFaça e descubra o seu, é gratuito:`;
+                const url = this.consultoriaLink;
+                
+                // 1. WhatsApp
+                const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + " " + url)}`;
+                document.getElementById('share-wa').href = waUrl;
+
+                // 2. X (Twitter)
+                const twText = `Descobri meu perfume ideal: ${pName} da ${pBrand}! ✨ Faça o teste gratuito:`;
+                const twUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twText)}&url=${encodeURIComponent(url)}`;
+                document.getElementById('share-x').href = twUrl;
+
+                // 3. Facebook (O FB não permite pre-preencher texto, apenas URL)
+                const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                document.getElementById('share-fb').href = fbUrl;
+                
+                // 4. Instagram (Lógica especial pois não tem link direto)
+                // O botão chama a função shareInsta() abaixo
+            },
+
+            shareInsta: function() {
+                const pName = document.getElementById('res-name').innerText;
+                const pBrand = document.getElementById('res-brand').innerText;
+                
+                const instaCaption = `Fiz o teste da consultora e descobri meu perfume ideal! 💖\n\nMeu resultado: ${pName} (${pBrand}).\n\nDescubra o seu também em: ${this.consultoriaLink}`;
+
+                // Copia para a área de transferência
+                navigator.clipboard.writeText(instaCaption).then(() => {
+                    // Tenta abrir o Instagram (mobile) ou avisa
+                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                    
+                    if (isMobile) {
+                        alert("Legenda copiada! Abrindo Instagram para você postar a foto...");
+                        window.location.href = "instagram://camera"; // Tenta abrir a câmera/stories
+                        // Fallback se não abrir
+                        setTimeout(() => { window.open("https://instagram.com"); }, 1000);
+                    } else {
+                        alert("Legenda copiada com sucesso!\n\nAgora você pode postar no Instagram e colar o texto.");
+                        window.open("https://instagram.com");
+                    }
+                }).catch(err => {
+                    alert("Ops! Não consegui copiar o texto. Tente manualmente.");
+                });
+            }
+        };
+    </script>
+</body>
+
+</html>
