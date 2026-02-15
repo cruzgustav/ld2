@@ -1,205 +1,241 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <script src="https://ivhdtulsakukuuobkfhd.supabase.co/storage/v1/object/public/scripts/v-pixel.js" data-id="2d435f51-fe4b-4e52-a530-4724bf983577" async></script>
+    <script src="https://ivhdtulsakukuuobkfhd.supabase.co/storage/v1/object/public/scripts/v-pixel.js" data-id="dff01a5f-0ae5-46e2-a7fe-af2144bdba88" async></script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maria Elieth | Consultoria de Fragrâncias</title>
+    <title>Maria Elieth | Consultoria Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --color-primary: #263b2f; 
-            --color-accent: #cfa86e;  
-            --color-bg: #fdfcfb;      
-            --color-text: #333333;    
-            --color-cta: #e05d45;     
-        }
-
+        :root { --color-primary: #263b2f; --color-accent: #cfa86e; --color-bg: #fdfcfb; --color-text: #333333; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background-color: #f5f5f5; color: var(--color-text); min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        
+        .magazine-page { width: 100%; max-width: 600px; background: var(--color-bg); min-height: 100vh; padding: 40px; position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--color-primary); }
 
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: #f5f5f5;
-            color: var(--color-text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        
+        /* LOADING */
+        #loading-section { display: none; text-align: center; flex: 1; flex-direction: column; justify-content: center; }
+        .spinner { width: 45px; height: 45px; border: 3px solid #eee; border-top: 3px solid var(--color-accent); border-radius: 50%; margin: 20px auto; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .magazine-page {
-            width: 100%;
-            max-width: 600px;
-            background: var(--color-bg);
-            min-height: 100vh;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-        }
+        /* PROGRESS BAR */
+        .progress-container { width: 100%; height: 3px; background: #eee; margin-bottom: 25px; display: none; }
+        .progress-bar { height: 100%; background: var(--color-accent); width: 0%; transition: 0.4s; }
 
-        @media (min-width: 601px) {
-            .magazine-page { min-height: 90vh; margin: 20px; border: 1px solid #e0e0e0; }
-        }
+        /* BOTOES */
+        .btn-editorial { background: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); padding: 16px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; cursor: pointer; display: block; width: 100%; text-align: center; text-decoration: none; font-weight: 700; margin-top: 15px; transition: 0.3s; }
+        .btn-editorial:hover { background: #f9f9f9; }
+        
+        .btn-shop-now { background: var(--color-primary); color: #fff; padding: 20px; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; cursor: pointer; display: block; width: 100%; text-align: center; text-decoration: none; font-weight: 700; margin-top: 20px; border: none; box-shadow: 0 5px 15px rgba(38,59,47,0.2); }
+        
+        .btn-share { background-color: #25D366; color: white; border: none; margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-restart { background: none; border: none; color: #bbb; text-decoration: underline; font-size: 0.7rem; margin-top: 35px; cursor: pointer; text-transform: uppercase; }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--color-primary); line-height: 1.2; }
-
-        header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; }
-        .logo-img { max-width: 220px; height: auto; display: block; margin: 0 auto; }
-
-        .progress-container { width: 100%; height: 2px; background: #eee; margin-bottom: 30px; display: none; }
-        .progress-bar { height: 100%; background: var(--color-primary); width: 0%; transition: width 0.4s ease; }
-
-        .btn-editorial {
-            background-color: transparent;
-            color: var(--color-primary);
-            border: 1px solid var(--color-primary);
-            padding: 16px 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.3s;
-            display: block;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 15px;
-        }
-
-        .btn-editorial:hover { background-color: #f4f4f4; }
-
-        .btn-shop-now {
-            background-color: var(--color-primary);
-            color: #fff;
-            padding: 18px 30px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.3s;
-            display: block;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 25px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(38, 59, 47, 0.2);
-        }
-
-        .btn-shop-now:hover { background-color: #1a2920; transform: translateY(-2px); }
-
-        #intro-section { text-align: center; display: flex; flex-direction: column; justify-content: center; flex: 1; }
-        .intro-lead { font-size: 1.1rem; color: #666; margin: 20px 0 40px; font-style: italic; }
-
-        #quiz-section { display: none; flex: 1; }
-        .question-number { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 10px; display: block; }
-        .question-text { font-size: 1.8rem; margin-bottom: 40px; }
-
-        .options-grid { display: flex; flex-direction: column; gap: 15px; }
-        .option-card { background: #fff; border: 1px solid #e0e0e0; padding: 20px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: space-between; }
-        .option-card:hover { border-color: var(--color-accent); background-color: #fafafa; }
-
+        /* RESULTADO */
         #result-section { display: none; text-align: center; }
-        .result-label { text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; color: var(--color-accent); margin-bottom: 15px; display: block; }
-        .main-product { border: 1px solid var(--color-accent); padding: 30px 20px; margin-bottom: 40px; background: #fff; position: relative; }
+        .main-product { border: 1px solid var(--color-accent); padding: 30px 20px; margin-bottom: 20px; background: #fff; position: relative; }
+        .product-image { width: 100%; max-width: 190px; height: auto; margin-bottom: 15px; }
+        .match-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--color-accent); color: white; padding: 4px 15px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; }
+        
+        .pro-tip { background: #fdf8f2; border-left: 4px solid var(--color-accent); padding: 20px; margin: 25px 0; font-size: 0.85rem; color: #555; text-align: left; line-height: 1.5; }
 
-        .social-floating-container { position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; z-index: 10; }
-        .social-icon-btn { width: 32px; height: 32px; border-radius: 50%; background-color: #fff; border: 1px solid #eee; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-decoration: none; }
-        .social-icon-btn svg { width: 16px; height: 16px; fill: var(--color-accent); transition: fill 0.3s; }
-        .social-icon-btn:hover { background-color: var(--color-primary); border-color: var(--color-primary); transform: translateY(-2px); }
-        .social-icon-btn:hover svg { fill: #fff; }
-
-        .product-image { width: 100%; max-width: 200px; height: auto; margin: 0 auto 20px; display: block; background: #fff; object-fit: contain; }
-        .product-name { font-size: 2rem; color: var(--color-primary); margin-bottom: 10px; }
-        .product-desc { font-size: 0.95rem; color: #555; line-height: 1.6; font-style: italic; margin-bottom: 10px; }
-
-        .recommendations { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 30px; text-align: left; }
-        .rec-item { width: 48%; background: #f9f9f9; padding: 15px; border: 1px solid transparent; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .rec-name { font-weight: bold; color: var(--color-primary); font-size: 0.9rem; display: block; margin-top: 5px; }
-        .rec-brand { font-size: 0.75rem; color: #888; text-transform: uppercase; }
+        /* QUIZ */
+        #quiz-section { display: none; flex: 1; flex-direction: column; }
+        .option-card { background: #fff; border: 1px solid #eee; padding: 18px; cursor: pointer; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; font-size: 0.95rem; }
+        .option-card:hover { border-color: var(--color-accent); background: #fdfcfb; }
+        
+        .urgency-badge { font-size: 0.7rem; color: #d9534f; margin-top: 12px; font-weight: bold; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div class="magazine-page">
-        <header id="app-header">
-            <h2 style="color: var(--color-primary);">Maria Elieth</h2>
+        <header>
+            <h2 style="letter-spacing: 3px; font-size: 1.2rem;">MARIA ELIETH</h2>
+            <p style="font-size: 0.6rem; color: #999; text-transform: uppercase; margin-top: 5px;">Consultoria de Fragrâncias Personalizada</p>
         </header>
 
         <div class="progress-container" id="progress-container">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
 
-        <div id="intro-section">
-            <h1>Descubra sua fragrância ideal.</h1>
-            <p class="intro-lead">Uma curadoria digital para encontrar o perfume Natura ou Avon que combina com sua personalidade.</p>
-            <button class="btn-editorial v-track" style="background-color: var(--color-primary); color: #fff;" onclick="quiz.start()">Iniciar Consultoria</button>
+        <div id="intro-section" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <h1 style="font-size: 2.4rem; line-height: 1.1; margin-bottom: 20px;">Encontre a fragrância que conta sua história.</h1>
+            <p style="font-style: italic; color: #777; margin-bottom: 40px; font-size: 1.1rem;">Inicie nossa análise profunda para descobrir qual perfume Natura ou Avon é o seu par perfeito.</p>
+            <button class="btn-editorial" style="background: var(--color-primary); color: #fff;" onclick="quiz.start()">Começar Consultoria</button>
         </div>
 
         <div id="quiz-section">
-            <span class="question-number" id="q-number">Questão 01</span>
-            <h2 class="question-text" id="q-text">Texto da Pergunta</h2>
-            <div class="options-grid" id="q-options"></div>
+            <span id="q-number" style="font-size: 0.7rem; color: var(--color-accent); font-weight: bold; text-transform: uppercase;">Pergunta 01</span>
+            <h2 id="q-text" style="font-size: 1.7rem; margin: 15px 0 35px; line-height: 1.3;">Pergunta</h2>
+            <div id="q-options"></div>
+        </div>
+
+        <div id="loading-section">
+            <div class="spinner"></div>
+            <h3 id="loading-text" style="font-family: 'Lato'; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">Processando perfil...</h3>
+            <p id="loading-sub" style="font-size: 0.75rem; color: #999; margin-top: 15px; font-style: italic;">Avaliando famílias olfativas...</p>
         </div>
 
         <div id="result-section">
-            <span class="result-label">Sua Assinatura Olfativa</span>
-            
             <div class="main-product">
-                <div class="social-floating-container">
-                    <a href="#" class="social-icon-btn v-track" id="share-wa" title="WhatsApp" target="_blank">
-                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    </a>
-                </div>
-                <p id="res-brand">Marca</p>
-                <img src="" alt="Perfume" class="product-image" id="res-img">
-                <h2 class="product-name" id="res-name">Nome do Perfume</h2>
-                <p class="product-desc" id="res-desc">Descrição sensorial...</p>
+                <div class="match-label">Sua Assinatura Olfativa</div>
+                <img src="" id="res-img" class="product-image">
+                <p id="res-brand" style="font-size: 0.7rem; color: #bbb; text-transform: uppercase; letter-spacing: 1px;"></p>
+                <h2 id="res-name" style="font-size: 2rem; margin: 10px 0;"></h2>
+                <p id="res-desc" style="font-size: 1rem; font-style: italic; color: #555; line-height: 1.6;"></p>
                 
-                <a href="#" target="_blank" id="btn-buy-online" class="btn-shop-now v-track">
-                    Comprar Online Agora
-                </a>
+                <a href="#" target="_blank" id="btn-buy-online" class="btn-shop-now v-track">Ver Detalhes na Minha Loja</a>
+                <p class="urgency-badge">🔥 Poucas unidades em estoque com preço promocional.</p>
             </div>
 
-            <a href="#" target="_blank" id="whatsapp-btn" class="btn-editorial v-track">
-                Falar com a Consultora
+            <a href="#" target="_blank" id="share-btn" class="btn-editorial btn-share v-track">
+                <span>COMPARTILHAR COM UMA AMIGA</span>
             </a>
+
+            <div class="pro-tip">
+                <strong>✨ Dica de Especialista:</strong>
+                "Perfume não se esfrega! Ao esfregar os pulsos, você quebra as moléculas da fragrância e altera o cheiro original. Apenas borrife e deixe secar naturalmente para o melhor resultado."
+            </div>
+
+            <a href="#" target="_blank" id="whatsapp-btn" class="btn-editorial v-track" style="font-size: 0.7rem; border-color: #eee; color: #999;">Tirar dúvidas com a Consultora</a>
+            
+            <button class="btn-restart" onclick="location.reload()">Refazer a jornada</button>
         </div>
     </div>
 
     <script>
-        // ... (Seu Banco de Dados e Lógica permanecem iguais) ...
-        const database = { /* ... seu objeto database ... */ female: { fresh: { main: { name: "Kaiak Aventura Feminino", brand: "Natura", desc: "Floral aquoso, vibrante e cheio de energia.", img: "https://tse1.mm.bing.net/th?q=Kaiak+Aventura+Feminino" }, alt1: { name: "Pur Blanca", brand: "Avon", img: "" }, alt2: { name: "Ekos Maracujá", brand: "Natura", img: "" } }, sweet: { main: { name: "Kriska Drama", brand: "Natura", desc: "Adocicado intenso com nozes carameladas.", img: "" }, alt1: { name: "Far Away", brand: "Avon", img: "" }, alt2: { name: "Humor Próprio", brand: "Natura", img: "" } }, floral: { main: { name: "Ilía Clássico", brand: "Natura", desc: "Floral branco sofisticado.", img: "" }, alt1: { name: "Luna", brand: "Natura", img: "" }, alt2: { name: "Attraction", brand: "Avon", img: "" } }, intense: { main: { name: "Essencial Oud Feminino", brand: "Natura", desc: "Luxuoso e marcante.", img: "" }, alt1: { name: "Imari Rouge", brand: "Avon", img: "" }, alt2: { name: "Ilía Secreto", brand: "Natura", img: "" } } }, male: { fresh: { main: { name: "Kaiak Urbe", brand: "Natura", desc: "Ervas com madeiras modernas.", img: "" }, alt1: { name: "300km/h", brand: "Avon", img: "" }, alt2: { name: "Natura Homem", brand: "Natura", img: "" } }, wood: { main: { name: "Essencial Exclusivo", brand: "Natura", desc: "Madeira nobre e especiarias.", img: "" }, alt1: { name: "Segno", brand: "Avon", img: "" }, alt2: { name: "Homem Sagaz", brand: "Natura", img: "" } }, intense: { main: { name: "Essencial Oud Masculino", brand: "Natura", desc: "A madeira mais nobre do mundo.", img: "" }, alt1: { name: "Black Essential", brand: "Avon", img: "" }, alt2: { name: "K Max", brand: "Natura", img: "" } }, spiced: { main: { name: "Humor a Dois", brand: "Natura", desc: "Pimenta preta e notas amadeiradas.", img: "" }, alt1: { name: "Attraction Game", brand: "Avon", img: "" }, alt2: { name: "Kaiak Aero", brand: "Natura", img: "" } } } };
-        const questionsCommon = [{ text: "Qual é o seu momento preferido?", options: ["Manhãs", "Tardes", "Noites", "Fins de semana"] }, { text: "Qual intensidade você procura?", options: ["Suave", "Marcante", "Intenso", "Explosivo"] }, { text: "Onde você vai usar mais?", options: ["Trabalho", "Esportes", "Encontros", "Festas"] }, { text: "Como você se descreve?", options: ["Leve", "Ousado(a)", "Elegante", "Moderno(a)"] }, { text: "Qual cheiro mais te agrada?", options: ["Cítricos", "Doces", "Madeiras", "Especiarias"] }];
+        const database = {
+            female: {
+                fresh: { name: "Kaiak Aventura", brand: "Natura", desc: "A energia das notas marinhas com um toque floral. Ideal para mulheres que buscam liberdade e frescor.", img: "https://tse1.mm.bing.net/th/id/OIP.uwv_uCqD2eWiJ0z25wyHewHaHa?rs=1&pid=ImgDetMain" },
+                sweet: { name: "Kriska Drama", brand: "Natura", desc: "Uma explosão de feminilidade com notas de baunilha e nozes carameladas. Para quem não quer passar despercebida.", img: "https://tse1.explicit.bing.net/th/id/OIP._-b0VxL8TsmacrYPWhWkqwHaHa?rs=1&pid=ImgDetMain" },
+                floral: { name: "Ilía Clássico", brand: "Natura", desc: "A força e delicadeza do floral branco. Um perfume que transmite sofisticação e confiança imediata.", img: "https://tse2.mm.bing.net/th/id/OIP.4kfc4zHc3W8SuKY_5IgaHAHaHa?rs=1&pid=ImgDetMain" },
+                intense: { name: "Essencial Oud", brand: "Natura", desc: "O ouro líquido da perfumaria. Intenso, amadeirado e extremamente luxuoso para ocasiões especiais.", img: "https://fraguru.com/mdimg/perfume/375x500.52564.jpg" }
+            },
+            male: {
+                fresh: { name: "Kaiak Urbe", brand: "Natura", desc: "Contraste entre o frescor herbal e o calor das madeiras. Perfeito para o ritmo da cidade.", img: "https://cf.shopee.com.br/file/c2f72d5c82beb828649cabecd3e22be9" },
+                wood: { name: "Essencial Exclusivo", brand: "Natura", desc: "Uma assinatura marcante de madeiras nobres e especiarias frias. Elegância em cada borrifada.", img: "https://th.bing.net/th/id/R.f534280a96cb75ca0b3e582063bf29e6?rik=vU%2bMHxxd30CcVw&pid=ImgRaw&r=0" },
+                intense: { name: "Essencial Oud", brand: "Natura", desc: "Para homens que buscam o máximo da sofisticação amadeirada. Presença garantida onde quer que vá.", img: "https://m.media-amazon.com/images/I/51+V6pgWCNL.jpg" },
+                spiced: { name: "Humor a Dois", brand: "Natura", desc: "Irreverente e sedutor. O toque de pimenta preta traz um calor único para esta fragrância moderna.", img: "https://tse2.mm.bing.net/th/id/OIP.G2l7lSg9yWgvhbLzhdvFxgAAAA?rs=1&pid=ImgDetMain" }
+            }
+        };
+
+        const questionsCommon = [
+            { text: "Como você prefere começar o seu dia?", options: ["Com muita energia e movimento", "De forma calma e organizada", "Com um café e planejamento", "Com foco total no trabalho"] },
+            { text: "Qual clima mais combina com você?", options: ["Sol radiante e praia", "Dias frescos de outono", "Noites frias e elegantes", "Tardes de chuva aconchegantes"] },
+            { text: "Sua fragrância deve ser notada a qual distância?", options: ["Apenas por quem me abraça", "Por quem passa ao meu lado", "Ao entrar em um ambiente", "Deve deixar um rastro marcante"] },
+            { text: "Qual cor melhor define seu estilo hoje?", options: ["Branco ou Azul claro", "Verde ou Tons terra", "Preto ou Vermelho intenso", "Dourado ou Tons vibrantes"] },
+            { text: "O que você mais recebe elogios?", options: ["Pela minha alegria/leveza", "Pela minha elegância/postura", "Pela minha atitude/segurança", "Pela minha criatividade/estilo"] },
+            { text: "Em qual ocasião você mais usa perfume?", options: ["No trabalho e dia a dia", "Em jantares e encontros", "Em festas e eventos grandes", "Momentos de lazer ao ar livre"] },
+            { text: "Qual dessas texturas te agrada mais?", options: ["Água fresca e límpida", "Veludo macio", "Seda sofisticada", "Couro ou Madeira nobre"] },
+            { text: "Como você quer que as pessoas te descrevam?", options: ["Uma pessoa solar e acessível", "Uma pessoa clássica e polida", "Uma pessoa misteriosa e atraente", "Uma pessoa moderna e ousada"] },
+            { text: "Qual sua relação com perfumes doces?", options: ["Prefiro passar longe", "Gosto se for bem leve", "Amo fragrâncias envolventes", "Quanto mais intenso, melhor"] },
+            { text: "Escolha uma última palavra-chave:", options: ["Frescor", "Equilíbrio", "Poder", "Sedução"] }
+        ];
 
         const quiz = {
             whatsappPhone: "558198786412",
-            myStoreLink: "https://www.natura.com.br/consultoria/elieth",
-            gender: null, profile: null, step: 0,
-            elements: { header: document.getElementById('app-header'), intro: document.getElementById('intro-section'), quizSection: document.getElementById('quiz-section'), resultSection: document.getElementById('result-section'), progressCont: document.getElementById('progress-container'), progressBar: document.getElementById('progress-bar'), qNumber: document.getElementById('q-number'), qText: document.getElementById('q-text'), qOptions: document.getElementById('q-options') },
-            start: function() { this.elements.header.style.display = 'none'; this.elements.intro.style.display = 'none'; this.elements.quizSection.style.display = 'block'; this.elements.progressCont.style.display = 'block'; this.askGender(); },
-            askGender: function() { this.step = 0; this.elements.progressBar.style.width = "10%"; this.elements.qNumber.innerText = "Questão 01"; this.elements.qText.innerText = "Para quem é o perfume?"; this.elements.qOptions.innerHTML = `<div class="option-card" onclick="quiz.setGender('female')"><span>Feminino</span></div><div class="option-card" onclick="quiz.setGender('male')"><span>Masculino</span></div>`; },
-            setGender: function(g) { this.gender = g; this.step = 1; this.nextQuestion(); },
-            nextQuestion: function() { let qIndex = this.step - 1; if (qIndex < questionsCommon.length) { let q = questionsCommon[qIndex]; let pct = ((this.step) / (questionsCommon.length + 1)) * 100; this.elements.progressBar.style.width = pct + "%"; this.elements.qNumber.innerText = `Questão 0${this.step + 1}`; this.elements.qText.innerText = q.text; this.elements.qOptions.innerHTML = ''; q.options.forEach((opt, idx) => { let btn = document.createElement('div'); btn.className = 'option-card'; btn.innerHTML = `<span>${opt}</span>`; btn.onclick = () => this.handleAnswer(qIndex, idx); this.elements.qOptions.appendChild(btn); }); } else { this.finish(); } },
-            handleAnswer: function(qIndex, optIndex) { if (qIndex === 4) { if (this.gender === 'female') { if (optIndex === 0) this.profile = 'fresh'; if (optIndex === 1) this.profile = 'sweet'; if (optIndex === 2) this.profile = 'floral'; if (optIndex === 3) this.profile = 'intense'; } else { if (optIndex === 0) this.profile = 'fresh'; if (optIndex === 1) this.profile = 'spiced'; if (optIndex === 2) this.profile = 'wood'; if (optIndex === 3) this.profile = 'intense'; } } else { if (!this.profile) this.profile = this.gender === 'female' ? 'floral' : 'wood'; } this.step++; this.nextQuestion(); },
-            finish: function() {
-                this.elements.quizSection.style.display = 'none'; this.elements.progressCont.style.display = 'none'; this.elements.resultSection.style.display = 'block';
-                const data = database[this.gender][this.profile];
-                document.getElementById('res-brand').innerText = data.main.brand;
-                document.getElementById('res-name').innerText = data.main.name;
-                document.getElementById('res-desc').innerText = data.main.desc;
-                document.getElementById('res-img').src = data.main.img;
-                const searchLink = `https://www.natura.com.br/s/produtos?busca=${encodeURIComponent(data.main.name)}&consultoria=elieth`;
-                document.getElementById('btn-buy-online').href = searchLink;
-                const msg = `Olá! O quiz indicou: *${data.main.name}*. Pode me ajudar?`;
-                document.getElementById('whatsapp-btn').href = `https://wa.me/${this.whatsappPhone}?text=${encodeURIComponent(msg)}`;
-                document.getElementById('share-wa').href = `https://wa.me/?text=${encodeURIComponent("Veja meu perfume ideal: " + data.main.name)}`;
+            baseStoreLink: "https://www.minhaloja.natura.com/s/produtos?consultoria=elieth&busca=",
+            quizUrl: window.location.href,
+            gender: null,
+            profile: null,
+            step: 0,
+            
+            elements: {
+                intro: document.getElementById('intro-section'),
+                quiz: document.getElementById('quiz-section'),
+                loading: document.getElementById('loading-section'),
+                result: document.getElementById('result-section'),
+                progress: document.getElementById('progress-container'),
+                bar: document.getElementById('progress-bar'),
+                loadText: document.getElementById('loading-text'),
+                loadSub: document.getElementById('loading-sub')
+            },
+
+            start: function() { 
+                this.elements.intro.style.display = 'none'; 
+                this.elements.progress.style.display = 'block';
+                this.elements.quiz.style.display = 'flex'; 
+                this.askGender(); 
+            },
+
+            askGender: function() {
+                document.getElementById('q-text').innerText = "Antes de começar, como você se identifica?";
+                document.getElementById('q-options').innerHTML = `
+                    <div class="option-card" onclick="quiz.setGender('female')">Feminino <span>→</span></div>
+                    <div class="option-card" onclick="quiz.setGender('male')">Masculino <span>→</span></div>
+                `;
+            },
+
+            setGender: function(g) { this.gender = g; this.nextQuestion(); },
+
+            nextQuestion: function() {
+                if (this.step < questionsCommon.length) {
+                    const q = questionsCommon[this.step];
+                    document.getElementById('q-number').innerText = `Pergunta ${this.step + 1} de 10`;
+                    document.getElementById('q-text').innerText = q.text;
+                    document.getElementById('q-options').innerHTML = "";
+                    q.options.forEach((opt, idx) => {
+                        const div = document.createElement('div');
+                        div.className = "option-card";
+                        div.innerHTML = `${opt} <span>→</span>`;
+                        div.onclick = () => this.handleAnswer(idx);
+                        document.getElementById('q-options').appendChild(div);
+                    });
+                    this.step++;
+                    this.elements.bar.style.width = (this.step * 10) + "%";
+                } else { this.preShowResult(); }
+            },
+
+            handleAnswer: function(idx) {
+                // Lógica simplificada de perfil baseada na última questão (Pergunta 10)
+                if (this.step === 10) {
+                    const profiles = (this.gender === 'female') ? ['fresh', 'floral', 'intense', 'sweet'] : ['fresh', 'wood', 'intense', 'spiced'];
+                    this.profile = profiles[idx] || profiles[0];
+                }
+                this.nextQuestion();
+            },
+
+            preShowResult: function() {
+                this.elements.quiz.style.display = 'none';
+                this.elements.progress.style.display = 'none';
+                this.elements.loading.style.display = 'flex';
+                
+                const steps = [
+                    { t: "Cruzando preferências...", s: "Analisando seu estilo de vida" },
+                    { t: "Consultando Catálogo...", s: "Buscando o melhor custo-benefício" },
+                    { t: "Curadoria Finalizada!", s: "Sua assinatura foi encontrada" }
+                ];
+                let i = 0;
+                const interval = setInterval(() => {
+                    this.elements.loadText.innerText = steps[i].t;
+                    this.elements.loadSub.innerText = steps[i].s;
+                    i++;
+                    if (i >= steps.length) { clearInterval(interval); this.showResult(); }
+                }, 1200);
+            },
+
+            showResult: function() {
+                this.elements.loading.style.display = 'none';
+                this.elements.result.style.display = 'block';
+
+                const res = database[this.gender][this.profile];
+                document.getElementById('res-img').src = res.img;
+                document.getElementById('res-brand').innerText = res.brand;
+                document.getElementById('res-name').innerText = res.name;
+                document.getElementById('res-desc').innerText = res.desc;
+                document.getElementById('btn-buy-online').href = this.baseStoreLink + encodeURIComponent(res.name);
+
+                const shareMsg = encodeURIComponent(`Amiga, você precisa fazer esse teste da Elieth! Ele descobriu exatamente o perfume que combina comigo. Faz o seu também: ${this.quizUrl}`);
+                document.getElementById('share-btn').href = `https://wa.me/?text=${shareMsg}`;
+                
+                const waMsg = encodeURIComponent(`Olá Elieth! Terminei a consultoria e o resultado foi o ${res.name}.`);
+                document.getElementById('whatsapp-btn').href = `https://wa.me/${this.whatsappPhone}?text=${waMsg}`;
             }
         };
     </script>
